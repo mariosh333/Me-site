@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кирилл · Портфолио</title>
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            transition: background-color 0.3s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* темы */
+        body.light {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+        body.dark {
+            background: #1e1e2f;
+            color: #e2e8f0;
+        }
+        body.very-dark {
+            background: #0b0b14;
+            color: #cfd8e6;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* шапка */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            gap: 1rem;
+        }
+
+        .profile h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .profile h1 span {
+            color: #3b82f6;
+        }
+        .profile .age {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 0.6rem;
+            background: rgba(0,0,0,0.04);
+            padding: 0.4rem 0.6rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+        body.dark .theme-switcher {
+            background: rgba(255,255,255,0.06);
+        }
+        body.very-dark .theme-switcher {
+            background: rgba(255,255,255,0.03);
+        }
+        .theme-btn {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 0.9rem;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: inherit;
+            opacity: 0.6;
+            transition: 0.2s;
+        }
+        .theme-btn.active {
+            opacity: 1;
+            background: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+        .theme-btn:hover {
+            opacity: 1;
+        }
+
+        /* секции */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1.2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title i {
+            color: #3b82f6;
+        }
+
+        /* слайдер (горизонтальный скролл) */
+        .slider-wrapper {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: visible;
+            padding: 0.5rem 0.2rem 1.8rem 0.2rem;
+            scroll-behavior: smooth;
+            display: flex;
+            gap: 1.2rem;
+            scrollbar-width: thin;
+            scrollbar-color: #3b82f6 #d1d5db;
+            border-radius: 20px;
+        }
+        .slider-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        .slider-wrapper::-webkit-scrollbar-track {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .slider-wrapper::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+        body.dark .slider-wrapper::-webkit-scrollbar-track { background: #2d2d44; }
+        body.very-dark .slider-wrapper::-webkit-scrollbar-track { background: #1f1f2e; }
+
+        .slider {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: nowrap;
+            align-items: stretch;
+            padding-bottom: 0.2rem;
+        }
+
+        /* карточки навыков (маленькие) */
+        .skill-card {
+            min-width: 150px;
+            max-width: 170px;
+            background: white;
+            padding: 1.2rem 1rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s, box-shadow 0.2s;
+            flex-shrink: 0;
+        }
+        body.dark .skill-card {
+            background: #2a2a3e;
+            border-color: #3a3a52;
+        }
+        body.very-dark .skill-card {
+            background: #191926;
+            border-color: #2a2a3a;
+        }
+        .skill-card:hover {
+            transform: scale(1.04);
+            background: #e6edf8;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+        body.dark .skill-card:hover {
+            background: #353550;
+        }
+        body.very-dark .skill-card:hover {
+            background: #26263a;
+        }
+        .skill-card .icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.4rem;
+        }
+        .skill-card .name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* подробное описание навыка (появляется снизу карточки, внутри слайдера) */
+        .skill-detail {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            background: rgba(59, 130, 246, 0.06);
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            display: none;
+            max-width: 160px;
+            word-break: break-word;
+            border-left: 2px solid #3b82f6;
+        }
+        .skill-card.active-detail .skill-detail {
+            display: block;
+        }
+
+        /* карточки проектов (большие) */
+        .project-card {
+            min-width: 260px;
+            max-width: 290px;
+            background: white;
+            padding: 1.6rem 1.2rem 1.2rem;
+            border-radius: 28px;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.02);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        body.dark .project-card {
+            background: #25253b;
+            border-color: #363650;
+        }
+        body.very-dark .project-card {
+            background: #151522;
+            border-color: #28283a;
+        }
+        .project-card:hover {
+            transform: scale(1.02);
+            background: #eef3fc;
+            box-shadow: 0 16px 30px rgba(0,0,0,0.06);
+        }
+        body.dark .project-card:hover {
+            background: #30304a;
+        }
+        body.very-dark .project-card:hover {
+            background: #202036;
+        }
+        .project-card .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .project-card .project-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.4rem;
+            flex: 1;
+        }
+        .project-card .project-stack {
+            font-size: 0.7rem;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            align-self: flex-start;
+        }
+
+        /* панель подробного описания проектов (снизу общего поля карточек) */
+        .project-detail-panel {
+            margin-top: 1.8rem;
+            padding: 1.2rem 1.8rem;
+            background: rgba(59, 130, 246, 0.04);
+            border-radius: 28px;
+            border-left: 6px solid #3b82f6;
+            display: none;
+            width: 100%;
+            backdrop-filter: blur(2px);
+        }
+        body.dark .project-detail-panel {
+            background: rgba(59, 130, 246, 0.08);
+        }
+        body.very-dark .project-detail-panel {
+            background: rgba(59, 130, 246, 0.04);
+        }
+        .project-detail-panel.visible {
+            display: block;
+        }
+        .project-detail-panel h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .project-detail-panel p {
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 700px;
+        }
+
+        /* соцсети */
+        .socials {
+            margin-top: 3rem;
+            display: flex;
+            gap: 2.2rem;
+            justify-content: center;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(0,0,0,0.04);
+        }
+        body.dark .socials {
+            border-top-color: rgba(255,255,255,0.04);
+        }
+        .socials a {
+            color: inherit;
+            font-size: 2rem;
+            opacity: 0.7;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .socials a:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            color: #3b82f6;
+        }
+        .socials a span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+
+        .footer-note {
+            margin: 1rem 0 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        /* адаптив */
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: start; }
+            .project-card { min-width: 220px; }
+        }
+    </style>
+</head>
+<body class="light">
+<div class="container">
+    <!-- шапка -->
+    <div class="header">
+        <div class="profile">
+            <h1>Кирилл <span>·</span> 15 лет</h1>
+            <div class="age"><i class="fas fa-code"></i> юный программист</div>
+        </div>
+        <div class="theme-switcher">
+            <button class="theme-btn active" data-theme="light"><i class="fas fa-sun"></i> Светлая</button>
+            <button class="theme-btn" data-theme="dark"><i class="fas fa-moon"></i> Тёмная</button>
+            <button class="theme-btn" data-theme="very-dark"><i class="fas fa-star"></i> Очень тёмная</button>
+        </div>
+    </div>
+
+    <!-- навыки -->
+    <div class="section-title"><i class="fas fa-brain"></i> Мои навыки</div>
+    <div class="slider-wrapper" id="skillsSliderWrapper">
+        <div class="slider" id="skillsSlider">
+            <!-- карточки навыков будут добавлены JS -->
+        </div>
+    </div>
+
+    <!-- проекты -->
+    <div class="section-title" style="margin-top: 2rem;"><i class="fas fa-folder-open"></i> Проекты</div>
+    <div class="slider-wrapper" id="projectsSliderWrapper">
+        <div class="slider" id="projectsSlider">
+            <!-- карточки проектов будут добавлены JS -->
+        </div>
+    </div>
+    <!-- панель подробного описания проекта -->
+    <div class="project-detail-panel" id="projectDetailPanel">
+        <h3 id="projectDetailTitle">Название проекта</h3>
+        <p id="projectDetailDesc">Полное описание проекта появится здесь после нажатия на карточку.</p>
+    </div>
+
+    <!-- соцсети -->
+    <div class="socials">
+        <a href="https://t.me/iwtkm3" target="_blank"><i class="fab fa-telegram-plane"></i> <span>@iwtkm3</span></a>
+        <a href="https://discord.com/users/mariosh3" target="_blank"><i class="fab fa-discord"></i> <span>mariosh3</span></a>
+    </div>
+    <div class="footer-note">Кирилл, 15 лет · портфолио</div>
+</div>
+<script>
+    (function() {
+        // --- данные навыков ---
+        const skills = [
+            { name: 'Python', icon: 'fab fa-python', detail: 'Опыт 2+ года. Бэкенд, автоматизация, TG боты.' },
+            { name: 'RPG Maker MZ', icon: 'fab fa-js-square', detail: 'Опыт 6+ месяцев, баланс игр, созддание предметов и способностей' }
+            
+        ];
+
+        // --- данные проектов (6 штук) - обновлены по запросу ---
+        const projects = [
+            { title: 'Шутер', desc: 'Динамичный шутер на Pygame', fullDesc: 'Классический шутер с видом сверху. Реализованы: движение игрока, стрельба, волны врагов, система очков и здоровья. Стек: Python, Pygame.' },
+            { title: 'Платформер', desc: '2D платформер на Pygame', fullDesc: 'Платформер с 5 уникальными уровнями, физикой прыжков, сбором монет и препятствиями. Добавлены анимации персонажа и частицы. Стек: Python, Pygame.' },
+            { title: 'RPG', desc: 'Ролевая игра на RPG Maker MZ', fullDesc: 'Полноценная RPG с сюжетом, диалогами, системой уровней, инвентарём и битвами. Создано 3 локации, 10+ NPC, ветвящиеся квесты. Стек: RPG Maker MZ, JavaScript (плагины).' },
+          
+        ];
+
+        const skillsSlider = document.getElementById('skillsSlider');
+        const projectsSlider = document.getElementById('projectsSlider');
+        const detailPanel = document.getElementById('projectDetailPanel');
+        const detailTitle = document.getElementById('projectDetailTitle');
+        const detailDesc = document.getElementById('projectDetailDesc');
+
+        // --- рендер навыков ---
+        skills.forEach(skill => {
+            const card = document.createElement('div');
+            card.className = 'skill-card';
+            card.innerHTML = `
+                <div class="icon"><i class="${skill.icon}"></i></div>
+                <div class="name">${skill.name}</div>
+                <div class="skill-detail">${skill.detail}</div>
+            `;
+            // клик по карточке навыка: toggle подробное описание
+            card.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // убираем активный класс у других
+                document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('active-detail'));
+                this.classList.toggle('active-detail');
+            });
+            skillsSlider.appendChild(card);
+        });
+
+        // --- рендер проектов ---
+        projects.forEach((project, index) => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.dataset.index = index;
+            card.innerHTML = `
+                <div class="project-title">${project.title}</div>
+                <div class="project-desc">${project.desc}</div>
+                <div class="project-stack"><i class="fas fa-tag"></i> проект ${index+1}</div>
+            `;
+            card.addEventListener('click', function() {
+                const idx = parseInt(this.dataset.index);
+                const p = projects[idx];
+                detailTitle.textContent = p.title;
+                detailDesc.textContent = p.fullDesc;
+                detailPanel.classList.add('visible');
+                // прокрутим к панели (плавно)
+                detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+            projectsSlider.appendChild(card);
+        });
+
+        // --- переключение темы ---
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+
+        function setTheme(theme) {
+            body.className = theme;
+            themeBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === theme) btn.classList.add('active');
+            });
+            localStorage.setItem('portfolio-theme', theme);
+        }
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                setTheme(this.dataset.theme);
+            });
+        });
+
+        // восстановление темы
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+        setTheme(savedTheme);
+
+        // клик вне карточек навыков — скрываем их детали (по желанию, но оставим)
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.skill-card')) {
+                document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('active-detail'));
+            }
+        });
+
+        // Если клик на проект и уже открыт детальный панель, можно оставить как есть
+        // дополнительно: если кликнуть по пустому месту, панель не скрываем (это удобно)
+    })();
+</script>
+</body>
+</html>
