@@ -52,4 +52,4 @@
 [![Discord](https://img.shields.io/badge/mariosh3-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/users/mariosh3)
 
 ---
-⭐️ **Посетите мой сайт-визитку:** [https://mariosh333.github.io/Me-site/](https://mariosh333.github.io/Me-site/)# 👋 Привет! Я Кирилл, 15 лет
+⭐️ **Посетите мой сайт-визитку:** [https://mariosh333.github.io/Me-site/](https://mariosh333.github.io/Me-site/)# 
