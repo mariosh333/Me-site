@@ -294,6 +294,14 @@
             opacity: 0.85;
             max-width: 700px;
         }
+        .project-detail-panel a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .project-detail-panel a:hover {
+            text-decoration: underline;
+        }
 
         /* соцсети */
         .socials {
@@ -386,24 +394,41 @@
 </div>
 <script>
     (function() {
-        // --- данные навыков ---
+        // --- данные навыков (только Python, JavaScript, RPG Maker MZ) ---
         const skills = [
             { name: 'Python', icon: 'fab fa-python', detail: 'Опыт 2+ года. Бэкенд, автоматизация, TG боты.' },
-            { name: 'JavaScript', icon: 'fab fa-js-square', detail: 'React, Node.js, анимации, fullstack.' },
-            { name: 'C++', icon: 'fas fa-code', detail: 'Алгоритмы, структуры, олимпиадное программирование.' },
-            { name: 'HTML/CSS', icon: 'fab fa-html5', detail: 'Адаптивная вёрстка, Flex/Grid, анимации.' },
-            { name: 'SQL', icon: 'fas fa-database', detail: 'PostgreSQL, MySQL, оптимизация запросов.' },
-            { name: 'Git', icon: 'fab fa-git-alt', detail: 'Контроль версий, командная работа.' }
+            { name: 'JavaScript', icon: 'fab fa-js-square', detail: 'React, Node.js, анимации, fullstack, игры.' },
+            { name: 'RPG Maker MZ', icon: 'fas fa-dragon', detail: 'Опыт 6+ месяцев, баланс игр, создание предметов и способностей.' }
         ];
 
-        // --- данные проектов (6 штук) - обновлены с добавлением TG-бота ---
+        // --- данные проектов (первые 4: шутер, платформер, RPG на MZ, TG-бот) + новый RPG на JS ---
         const projects = [
-            { title: 'Шутер', desc: 'Динамичный шутер на Pygame', fullDesc: 'Классический шутер с видом сверху. Реализованы: движение игрока, стрельба, волны врагов, система очков и здоровья. Стек: Python, Pygame.' },
-            { title: 'Платформер', desc: '2D платформер на Pygame', fullDesc: 'Платформер с 5 уникальными уровнями, физикой прыжков, сбором монет и препятствиями. Добавлены анимации персонажа и частицы. Стек: Python, Pygame.' },
-            { title: 'RPG', desc: 'Ролевая игра на RPG Maker MZ', fullDesc: 'Полноценная RPG с сюжетом, диалогами, системой уровней, инвентарём и битвами. Создано 3 локации, 10+ NPC, ветвящиеся квесты. Стек: RPG Maker MZ, JavaScript (плагины).' },
-            { title: 'TG-бот калорий', desc: 'Бот для подсчёта калорий и БЖУ', fullDesc: 'TG-bot который считает калории, рассчитывает БЖУ, делает рекомендации по образу жизни и рациону. Стек: Python, aiogram, SQLite.' },
-            { title: 'Визуализатор данных', desc: 'Дашборд на D3.js + React', fullDesc: 'Интерактивный дашборд для статистики. Фильтры, графики, экспорт в PNG. Стек: React, D3, Express.' },
-            { title: 'Чат-приложение', desc: 'WebSocket чат на Node.js', fullDesc: 'Реальный чат с комнатами, приватными сообщениями, эмодзи. Использован Socket.io, Express, MongoDB. Адаптивный интерфейс.' }
+            { 
+                title: 'Шутер', 
+                desc: 'Динамичный шутер на Pygame', 
+                fullDesc: 'Классический шутер с видом сверху. Реализованы: движение игрока, стрельба, волны врагов, система очков и здоровья. Стек: Python, Pygame.' 
+            },
+            { 
+                title: 'Платформер', 
+                desc: '2D платформер на Pygame', 
+                fullDesc: 'Платформер с 5 уникальными уровнями, физикой прыжков, сбором монет и препятствиями. Добавлены анимации персонажа и частицы. Стек: Python, Pygame.' 
+            },
+            { 
+                title: 'RPG (RPG Maker MZ)', 
+                desc: 'Ролевая игра на RPG Maker MZ', 
+                fullDesc: 'Полноценная RPG с сюжетом, диалогами, системой уровней, инвентарём и битвами. Создано 3 локации, 10+ NPC, ветвящиеся квесты. Стек: RPG Maker MZ, JavaScript (плагины).' 
+            },
+            { 
+                title: 'TG-бот калорий', 
+                desc: 'Бот для подсчёта калорий и БЖУ', 
+                fullDesc: 'TG-bot который считает калории, рассчитывает БЖУ, делает рекомендации по образу жизни и рациону. Стек: Python, aiogram, SQLite.' 
+            },
+            { 
+                title: 'RPG на JavaScript', 
+                desc: 'Браузерная RPG игра', 
+                fullDesc: 'Приключенческая браузерная RPG с механиками боя, инвентарём и исследованием мира. Игра включает систему уровней, врагов и событий. Стек: JavaScript, HTML, CSS. Доступна по ссылке: <a href="https://mariosh333.github.io/game/" target="_blank">https://mariosh333.github.io/game/</a>',
+                isLink: true 
+            }
         ];
 
         const skillsSlider = document.getElementById('skillsSlider');
@@ -421,10 +446,8 @@
                 <div class="name">${skill.name}</div>
                 <div class="skill-detail">${skill.detail}</div>
             `;
-            // клик по карточке навыка: toggle подробное описание
             card.addEventListener('click', function(e) {
                 e.stopPropagation();
-                // убираем активный класс у других
                 document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('active-detail'));
                 this.classList.toggle('active-detail');
             });
@@ -445,9 +468,13 @@
                 const idx = parseInt(this.dataset.index);
                 const p = projects[idx];
                 detailTitle.textContent = p.title;
-                detailDesc.textContent = p.fullDesc;
+                // Если есть ссылка — вставляем как HTML, иначе обычный текст
+                if (p.isLink) {
+                    detailDesc.innerHTML = p.fullDesc;
+                } else {
+                    detailDesc.textContent = p.fullDesc;
+                }
                 detailPanel.classList.add('visible');
-                // прокрутим к панели (плавно)
                 detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             });
             projectsSlider.appendChild(card);
@@ -472,19 +499,14 @@
             });
         });
 
-        // восстановление темы
         const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
         setTheme(savedTheme);
 
-        // клик вне карточек навыков — скрываем их детали (по желанию, но оставим)
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.skill-card')) {
                 document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('active-detail'));
             }
         });
-
-        // Если клик на проект и уже открыт детальный панель, можно оставить как есть
-        // дополнительно: если кликнуть по пустому месту, панель не скрываем (это удобно)
     })();
 </script>
 </body>
