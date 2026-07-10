@@ -389,15 +389,21 @@
         // --- данные навыков ---
         const skills = [
             { name: 'Python', icon: 'fab fa-python', detail: 'Опыт 2+ года. Бэкенд, автоматизация, TG боты.' },
-            { name: 'RPG Maker MZ', icon: 'fab fa-js-square', detail: 'Опыт 6+ месяцев, баланс игр, создание предметов и способностей.' }
+            { name: 'JavaScript', icon: 'fab fa-js-square', detail: 'React, Node.js, анимации, fullstack.' },
+            { name: 'C++', icon: 'fas fa-code', detail: 'Алгоритмы, структуры, олимпиадное программирование.' },
+            { name: 'HTML/CSS', icon: 'fab fa-html5', detail: 'Адаптивная вёрстка, Flex/Grid, анимации.' },
+            { name: 'SQL', icon: 'fas fa-database', detail: 'PostgreSQL, MySQL, оптимизация запросов.' },
+            { name: 'Git', icon: 'fab fa-git-alt', detail: 'Контроль версий, командная работа.' }
         ];
 
-        // --- данные проектов (6 штук) - обновлены, добавлен RPG на Pygame ---
+        // --- данные проектов (6 штук) - обновлены с добавлением TG-бота ---
         const projects = [
             { title: 'Шутер', desc: 'Динамичный шутер на Pygame', fullDesc: 'Классический шутер с видом сверху. Реализованы: движение игрока, стрельба, волны врагов, система очков и здоровья. Стек: Python, Pygame.' },
             { title: 'Платформер', desc: '2D платформер на Pygame', fullDesc: 'Платформер с 5 уникальными уровнями, физикой прыжков, сбором монет и препятствиями. Добавлены анимации персонажа и частицы. Стек: Python, Pygame.' },
-            { title: 'RPG (MZ)', desc: 'Ролевая игра на RPG Maker MZ', fullDesc: 'Полноценная RPG с сюжетом, диалогами, системой уровней, инвентарём и битвами. Создано 3 локации, 10+ NPC, ветвящиеся квесты. Стек: RPG Maker MZ, JavaScript (плагины).' },
-            { title: 'RPG на Pygame', desc: 'Ролевая игра с открытым миром', fullDesc: 'RPG на Pygame с видом сверху, системой диалогов, квестов, инвентаря и пошаговыми боями. Вдохновение — классические RPG. Стек: Python, Pygame, Tiled. Ссылка на демо: https://mariosh333.github.io/game/' }
+            { title: 'RPG', desc: 'Ролевая игра на RPG Maker MZ', fullDesc: 'Полноценная RPG с сюжетом, диалогами, системой уровней, инвентарём и битвами. Создано 3 локации, 10+ NPC, ветвящиеся квесты. Стек: RPG Maker MZ, JavaScript (плагины).' },
+            { title: 'TG-бот калорий', desc: 'Бот для подсчёта калорий и БЖУ', fullDesc: 'TG-bot который считает калории, рассчитывает БЖУ, делает рекомендации по образу жизни и рациону. Стек: Python, aiogram, SQLite.' },
+            { title: 'Визуализатор данных', desc: 'Дашборд на D3.js + React', fullDesc: 'Интерактивный дашборд для статистики. Фильтры, графики, экспорт в PNG. Стек: React, D3, Express.' },
+            { title: 'Чат-приложение', desc: 'WebSocket чат на Node.js', fullDesc: 'Реальный чат с комнатами, приватными сообщениями, эмодзи. Использован Socket.io, Express, MongoDB. Адаптивный интерфейс.' }
         ];
 
         const skillsSlider = document.getElementById('skillsSlider');
